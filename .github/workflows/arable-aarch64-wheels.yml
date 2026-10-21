@@ -1,8 +1,11 @@
-name: Python package build
+name: Arable aarch64 wheels
 
 # Wheel-only build of exactextract 0.3.0 for Linux aarch64, used to serve a
-# flat package index for Arable's data-sources. Run manually.
+# flat package index for Arable's data-sources. Runs on a push to this branch or manually.
+# Separate file name from upstream's python.yml, which is disabled in this fork.
 on:
+  push:
+    branches: [arable-aarch64-wheels-0.3.0]
   workflow_dispatch:
 
 defaults:
@@ -15,7 +18,6 @@ jobs:
   build_wheels:
     name: Build ${{ matrix.arch }} wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    if: startsWith(github.event.ref, 'refs/tags') || github.event_name == 'release' || github.event_name == 'workflow_dispatch'
     env:
       GEOS_VERSION: "3.14.1"
 
